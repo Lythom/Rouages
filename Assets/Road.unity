@@ -143,6 +143,8 @@ MonoBehaviour:
   speed: 0.2
   tracks:
   - {fileID: 1111149441051512, guid: 155093c61b969754d8adf6f9c7981d54, type: 2}
+  - {fileID: 1111149441051512, guid: 155093c61b969754d8adf6f9c7981d54, type: 2}
+  - {fileID: 1111149441051512, guid: 155093c61b969754d8adf6f9c7981d54, type: 2}
 --- !u!4 &173019132
 Transform:
   m_ObjectHideFlags: 0
