@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 459529dfbb8524f469030013c53c4611
-timeCreated: 1517000701
+guid: 74aa0eecfd2eeb940afba934a37596fe
+timeCreated: 1517004501
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName: {}
@@ -34,19 +34,19 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 120
+  spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -99,7 +99,11 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: -100, y: 50}
+      - {x: -100, y: -50}
+      - {x: 100, y: -50}
+      - {x: 100, y: 50}
     physicsShape: []
   spritePackingTag: 
   userData: 

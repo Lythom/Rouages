@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraSizeFromRatio : MonoBehaviour {
 
-	public float height = 10f;
+	public float width = 8f;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,7 +13,7 @@ public class CameraSizeFromRatio : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		Camera.main.orthographicSize = height / Camera.main.aspect;
-		Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, - Camera.main.orthographicSize, Camera.main.transform.position.z);
+		Camera.main.orthographicSize = width / Camera.main.aspect;
+		Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
 	}
 }
