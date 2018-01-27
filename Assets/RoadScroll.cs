@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 public class RoadScroll : MonoBehaviour
 {
 
@@ -33,6 +33,13 @@ public class RoadScroll : MonoBehaviour
 
     private GameObject instantiateNextTrack()
     {
+        //var compatibleTracks = tracks.Where(t => t.name.Contains("7")).ToArray();
+        var currentTrackNumber = Regex.Match(currentTrack.name, @"\d+").Value;
+        var currentTrackNumberArray = currentTrackNumber.ToCharArray();
+        foreach (GameObject item in tracks)
+        {
+            Debug.Log(Regex.Match(item.name, @"\d+").Value);    
+        }
         var n = Instantiate(tracks[Random.Range(0, tracks.Length)]);
         n.transform.position = startPosNext;
         return n;

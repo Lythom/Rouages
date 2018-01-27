@@ -154,25 +154,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114647154862601854, guid: faea9f6da8c52c94582062dcbd106285,
         type: 2}
-      propertyPath: partyLength
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114647154862601854, guid: faea9f6da8c52c94582062dcbd106285,
-        type: 2}
-      propertyPath: initialSpacing
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114647154862601854, guid: faea9f6da8c52c94582062dcbd106285,
-        type: 2}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1219451103}
-    - target: {fileID: 114647154862601854, guid: faea9f6da8c52c94582062dcbd106285,
-        type: 2}
-      propertyPath: playerScorePrefab
-      value: 
-      objectReference: {fileID: 1691870886986442, guid: 14f0bcc99ef966747bb1fac06e0b0bcc,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: faea9f6da8c52c94582062dcbd106285, type: 2}
   m_IsPrefabParent: 0
@@ -322,7 +306,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.4999995
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
