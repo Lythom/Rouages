@@ -26,10 +26,12 @@ public class Party : MonoBehaviour
 
     private Dictionary<int, int> scores = new Dictionary<int, int>();
     private Dictionary<int, Text> scoreTexts = new Dictionary<int, Text>();
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         placeCars();
         initScores();
         roadScroll.trackFinishedCount = 0;
@@ -46,6 +48,8 @@ public class Party : MonoBehaviour
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
                 c.transform.position = getStartPosition(c);
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
+                audioSource.Stop();
+                audioSource.Play();
             }
             if (c.transform.position.x < losePosition.position.x)
             {

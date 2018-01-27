@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
 
-    public static float MAX_VOLUME = 0.25f;
+    public static float MAX_VOLUME = 0.32f;
     public static float MIN_VOLUME = 0.12f;
 
     public int playerId;
@@ -45,7 +46,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponents<AudioSource>().Where(a => a.clip == null).First();
         updateGearVisuals();
     }
 
@@ -91,7 +92,7 @@ public class Move : MonoBehaviour
         {
             PlayAudio(engineSounds[System.Math.Min(GearAmount, engineSounds.Length - 1)], true);
         }
-        audioSource.volume = audioSource.volume + (MIN_VOLUME - audioSource.volume) * 0.1f;
+        audioSource.volume = audioSource.volume + (MIN_VOLUME - audioSource.volume) * 0.15f;
     }
 
     public void PlayAudio(AudioClip clip, bool loop)
