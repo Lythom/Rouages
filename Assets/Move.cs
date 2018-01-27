@@ -12,34 +12,37 @@ public class Move : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movingVector;
 
-    public float gearAmount = 3;
-    private float horizontalSpeed;
+    private float gearAmount = 3;
+	public float GearAmount {
+		get { return gearAmount; }
+		set {
+			gearAmount = value;
+			updateGearVisuals();
+		}
+	}
+
+    private float horizontalSpeed {
+		get { return (gearAmount - 3) * 0.1f; }
+	}
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D> ();
-        horizontalSpeed = (gearAmount - 3) * 0.1f;
-        int i = 0;
-        foreach (Transform item in this.transform) {
-            i++;
-            if (gearAmount < i) {
-                item.gameObject.SetActive (false);
-            }
-        }
+        updateGearVisuals();
     }
+
+	private void updateGearVisuals() {
+		int i = 0;
+		foreach (Transform item in this.transform) {
+            i++;
+            item.gameObject.SetActive (GearAmount >= i);
+        }
+	}
 
     private void OnCollisionEnter2D (Collision2D other) {
         if (other.gameObject.CompareTag ("Collectible")) {
-            if (gearAmount < 7) {
-                gearAmount++;
-                horizontalSpeed = (gearAmount - 3) * 0.1f;
-                int i = 0;
-                foreach (Transform item in this.transform) {
-                    i++;
-                    if (gearAmount >= i) {
-                        item.gameObject.SetActive (true);
-                    }
-                }
+            if (GearAmount < 7) {
+                GearAmount++;
             }
             Destroy (other.gameObject);
         }

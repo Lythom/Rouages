@@ -45,14 +45,14 @@ public class Party : MonoBehaviour
                 scores[c.playerId] = scores[c.playerId] + 1;
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
                 c.transform.position = getStartPosition(c);
-                c.gearAmount = INITIAL_GEAR_AMOUNT;
+                c.GearAmount = INITIAL_GEAR_AMOUNT;
             }
             if (c.transform.position.x < losePosition.position.x)
             {
                 scores[c.playerId] = System.Math.Max(0, scores[c.playerId] - 1);
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
                 c.transform.position = getStartPosition(c);
-                c.gearAmount = INITIAL_GEAR_AMOUNT;
+                c.GearAmount = INITIAL_GEAR_AMOUNT;
             }
         });
 
