@@ -1283,8 +1283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 2
-  acceleration: 50
-  maxVerticalSpeed: 50
+  verticalAcceleration: 25
+  horizontalAcceleration: 0.1
+  horizontalMaxSpeedPerGear: 0.17
+  maxVerticalSpeed: 99
   rotationAmount: 0.05
 --- !u!114 &114191161989303674
 MonoBehaviour:
@@ -1314,8 +1316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 3
-  acceleration: 50
-  maxVerticalSpeed: 50
+  verticalAcceleration: 25
+  horizontalAcceleration: 0.1
+  horizontalMaxSpeedPerGear: 0.17
+  maxVerticalSpeed: 99
   rotationAmount: 0.05
 --- !u!114 &114544713621582402
 MonoBehaviour:
@@ -1329,8 +1333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 4
-  acceleration: 50
-  maxVerticalSpeed: 50
+  verticalAcceleration: 25
+  horizontalAcceleration: 0.1
+  horizontalMaxSpeedPerGear: 0.17
+  maxVerticalSpeed: 99
   rotationAmount: 0.05
 --- !u!114 &114647154862601854
 MonoBehaviour:
@@ -1350,9 +1356,12 @@ MonoBehaviour:
   - {fileID: 114544713621582402}
   losePosition: {fileID: 4719421246080176}
   winPosition: {fileID: 4600288982097092}
+  canvas: {fileID: 0}
+  playerScorePrefab: {fileID: 1691870886986442, guid: 14f0bcc99ef966747bb1fac06e0b0bcc,
+    type: 2}
   roadScroll: {fileID: 114191161989303674}
-  initialSpacing: 2
-  partyLength: 10
+  initialSpacing: 1.5
+  partyLength: 20
 --- !u!114 &114797042003472402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1365,8 +1374,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 1
-  acceleration: 50
-  maxVerticalSpeed: 50
+  verticalAcceleration: 25
+  horizontalAcceleration: 0.1
+  horizontalMaxSpeedPerGear: 0.17
+  maxVerticalSpeed: 99
   rotationAmount: 0.05
 --- !u!212 &212025048877066844
 SpriteRenderer:

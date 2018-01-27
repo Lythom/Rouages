@@ -6,6 +6,8 @@ using System.Linq;
 public class RoadScroll : MonoBehaviour
 {
 
+	public static float TRACK_WIDTH = 32f;
+
     public double speed = 0.15f;
 
     public GameObject[] tracks;
@@ -19,8 +21,8 @@ public class RoadScroll : MonoBehaviour
     private GameObject currentTrack = null;
     private GameObject nextTrack = null;
 
-    private Vector3 startPosCurrent = new Vector3(8, 0, 0);
-    private Vector3 startPosNext = new Vector3(8 + 16, 0, 0);
+    private Vector3 startPosCurrent = new Vector3(TRACK_WIDTH / 4, 0, 0);
+    private Vector3 startPosNext = new Vector3(TRACK_WIDTH / 4 + TRACK_WIDTH, 0, 0);
 
 
     // Use this for initialization
@@ -42,9 +44,9 @@ public class RoadScroll : MonoBehaviour
     void FixedUpdate()
     {
         offset = offset + speed;
-        if (offset > 16)
+        if (offset > TRACK_WIDTH)
         {
-            offset -= 16;
+            offset -= TRACK_WIDTH;
             Destroy(currentTrack);
             currentTrack = nextTrack;
             nextTrack = instantiateNextTrack();

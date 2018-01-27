@@ -5,59 +5,100 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
 
+    public static float MAX_VOLUME = 0.25f;
+    public static float MIN_VOLUME = 0.12f;
+
     public int playerId;
-    public float acceleration = 40f;
+    public float verticalAcceleration = 25f;
+    public float horizontalAcceleration = 0.1f;
+    public float horizontalMaxSpeedPerGear = 0.17f;
     public float maxVerticalSpeed = 99f;
-    public float rotationAmount = 0.5f;
+    public float rotationAmount = 0.05f;
+
+    public AudioClip[] engineSounds;
+    public AudioClip[] levelUpSounds;
+
     private Rigidbody2D rb;
-    private Vector2 movingVector;
 
-    private float gearAmount = 3;
-	public float GearAmount {
-		get { return gearAmount; }
-		set {
-			gearAmount = value;
-			updateGearVisuals();
-		}
-	}
+    private int gearAmount = 3;
+    private AudioSource audioSource;
 
-    private float horizontalSpeed {
-		get { return (gearAmount - 3) * 0.1f; }
-	}
+    public int GearAmount
+    {
+        get { return gearAmount; }
+        set
+        {
+            audioSource.Stop();
+            if (gearAmount < value) PlayAudio(levelUpSounds[System.Math.Min(value - 1, levelUpSounds.Length - 1)], false);
+            audioSource.volume = MAX_VOLUME;
+            gearAmount = value;
+            updateGearVisuals();
+        }
+    }
+
+    private float HorizontalSpeed
+    {
+        get { return (gearAmount - 3) * horizontalMaxSpeedPerGear; }
+    }
 
     // Use this for initialization
-    void Start () {
-        rb = GetComponent<Rigidbody2D> ();
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         updateGearVisuals();
     }
 
-	private void updateGearVisuals() {
-		int i = 0;
-		foreach (Transform item in this.transform) {
+    private void updateGearVisuals()
+    {
+        int i = 0;
+        foreach (Transform item in this.transform)
+        {
             i++;
-            item.gameObject.SetActive (GearAmount >= i);
+            item.gameObject.SetActive(GearAmount >= i);
         }
-	}
+    }
 
-    private void OnCollisionEnter2D (Collision2D other) {
-        if (other.gameObject.CompareTag ("Collectible")) {
-            if (GearAmount < 7) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            if (GearAmount < 7)
+            {
                 GearAmount++;
             }
-            Destroy (other.gameObject);
+            Destroy(other.gameObject);
         }
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (rb == null) return;
 
-        movingVector = new Vector2 (horizontalSpeed, Input.GetAxis ("Vertical"));
-        if (Mathf.Abs (rb.velocity.y) < maxVerticalSpeed) {
-            rb.AddForce (movingVector * acceleration);
+        if (Mathf.Abs(rb.velocity.y) < maxVerticalSpeed)
+        {
+            rb.AddForce(new Vector2(0, Input.GetAxis("Vertical1") * verticalAcceleration));
         }
-        rb.velocity = new Vector2 (horizontalSpeed, rb.velocity.y * 0.9f);
+        float targetVelocity = HorizontalSpeed;
+        float currentVelocity = rb.velocity.x;
+        float step = (targetVelocity - currentVelocity) * horizontalAcceleration;
+        rb.velocity = new Vector2(rb.velocity.x + step, rb.velocity.y * 0.9f);
 
-        this.transform.rotation = new Quaternion (0, 0, rb.velocity.y * rotationAmount, 1);
+        this.transform.rotation = new Quaternion(0, 0, rb.velocity.y * rotationAmount, 1);
+
+        if (!audioSource.isPlaying)
+        {
+            PlayAudio(engineSounds[System.Math.Min(GearAmount, engineSounds.Length - 1)], true);
+        }
+        audioSource.volume = audioSource.volume + (MIN_VOLUME - audioSource.volume) * 0.1f;
+    }
+
+    public void PlayAudio(AudioClip clip, bool loop)
+    {
+        audioSource.clip = clip;
+        audioSource.loop = loop;
+        audioSource.playOnAwake = true;
+        audioSource.Play();
     }
 }
