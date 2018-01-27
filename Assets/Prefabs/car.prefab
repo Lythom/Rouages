@@ -462,6 +462,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fadcc9fbbd4cf4fa87f65d64ac25f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boomClip: {fileID: 8300000, guid: f2ab80508b42be84cbe5c87427814792, type: 3}
+  mechanicClips:
+  - {fileID: 8300000, guid: c960b78c49ae49e4bacf59517946247c, type: 3}
+  - {fileID: 8300000, guid: d57896f19a456fd4886783defc35c20c, type: 3}
+  - {fileID: 8300000, guid: 28d552acf5cfb6f4396575c5acd58627, type: 3}
+  - {fileID: 8300000, guid: 938a70f766b03b04e984898cf46d66db, type: 3}
 --- !u!114 &114646498561705134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -496,6 +502,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40b08cf477a33ff4980e6dc673e3ac61, type: 3}
   - {fileID: 8300000, guid: 1bc7113a6503a134284f4d3b81e8a249, type: 3}
   - {fileID: 8300000, guid: b9f3fb9938033b643830941fb97670df, type: 3}
+  pickupSounds: []
 --- !u!212 &212002848626455248
 SpriteRenderer:
   m_ObjectHideFlags: 1

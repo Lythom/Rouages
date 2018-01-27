@@ -7,7 +7,7 @@ public class Move : MonoBehaviour
 {
 
     public static float MAX_VOLUME = 0.35f;
-    public static float MIN_VOLUME = 0.15f;
+    public static float MIN_VOLUME = 0.17f;
 
     public int playerId;
     public float verticalAcceleration = 25f;
@@ -20,6 +20,7 @@ public class Move : MonoBehaviour
 
     public AudioClip[] engineSounds;
     public AudioClip[] levelUpSounds;
+    public AudioClip[] pickupSounds;
 
     private Rigidbody2D rb;
 
@@ -94,7 +95,7 @@ public class Move : MonoBehaviour
         {
             PlayAudio(engineSounds[System.Math.Min(GearAmount, engineSounds.Length - 1)], true);
         }
-        audioSource.volume = audioSource.volume + (MIN_VOLUME - audioSource.volume) * 0.15f;
+        audioSource.volume = audioSource.volume + (MIN_VOLUME - audioSource.volume) * 0.12f;
 
         if (Input.GetButtonDown("Fire" + playerId) || Input.GetAxis("Fire" + playerId) != 0)
         {

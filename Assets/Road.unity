@@ -315,7 +315,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 07c2d93ae64b90e4096a69f9e4770d28, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_Volume: 0.12
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -439,11 +439,6 @@ Prefab:
     - target: {fileID: 1664735347729442, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_Name
       value: car1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114646498561705134, guid: bcee15c91e3e9e14aa06839df994ae71,
-        type: 2}
-      propertyPath: horizontalAcceleration
-      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
