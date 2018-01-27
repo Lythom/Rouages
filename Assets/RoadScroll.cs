@@ -18,6 +18,7 @@ public class RoadScroll : MonoBehaviour
 	// TODO : move to Party and use A delegate event to inform of offsetChange
 	public float trackFinishedCount = 0f;
 
+    private List<GameObject> compatibleTracks;
     private GameObject currentTrack = null;
     private GameObject nextTrack = null;
 
@@ -35,14 +36,21 @@ public class RoadScroll : MonoBehaviour
 
     private GameObject instantiateNextTrack()
     {
-        //var compatibleTracks = tracks.Where(t => t.name.Contains("7")).ToArray();
+        compatibleTracks = new List<GameObject>();
         var currentTrackNumber = Regex.Match(currentTrack.name, @"\d+").Value;
         var currentTrackNumberArray = currentTrackNumber.ToCharArray();
+
         foreach (GameObject item in tracks)
         {
-            Debug.Log(Regex.Match(item.name, @"\d+").Value);    
+            var itemNumber = Regex.Match(item.name, @"\d+").Value;
+            var itemNumberArray = itemNumber.ToCharArray();
+            
+            if (currentTrackNumberArray[1] == itemNumberArray[0])
+                compatibleTracks.Add(item);                
         }
-        var n = Instantiate(tracks[Random.Range(0, tracks.Length)]);
+        
+        compatibleTracks.ToArray();
+        var n = Instantiate(compatibleTracks[Random.Range(0, compatibleTracks.Count)]);
         n.transform.position = startPosNext;
         return n;
     }
