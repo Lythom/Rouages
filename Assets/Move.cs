@@ -11,22 +11,33 @@ public class Move : MonoBehaviour {
 	private Rigidbody2D rb;
 	private Vector2 movingVector;
 
-	private float gearAmount = 0;
-	private float horizontalSpeed = 0;
+	private float gearAmount = 3;
+	private float horizontalSpeed;
 	
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
+		horizontalSpeed = (gearAmount - 3) * 0.1f;		
+		int i = 0;
+		foreach (Transform item in this.transform) {
+			i++;
+			if (gearAmount < i) {
+				item.gameObject.SetActive(false);											
+			}
+		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Collectible")) {
 			if (gearAmount < 7) {
 				gearAmount++;
-				horizontalSpeed = gearAmount * 0.1f;
-				foreach (var item in this.transform)
-				{
-					
+				horizontalSpeed = (gearAmount - 3) * 0.1f;
+				int i = 0;
+				foreach (Transform item in this.transform) {
+					i++;
+					if (gearAmount >= i) {
+						item.gameObject.SetActive(true);											
+					}
 				}
 			}
         	Destroy(other.gameObject);
