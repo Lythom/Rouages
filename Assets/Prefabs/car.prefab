@@ -240,7 +240,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1664735347729442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.155, y: -0.024, z: 1}
+  m_LocalPosition: {x: -4.155, y: 2.74, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4946342289737654}
@@ -281,7 +281,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1664735347729442}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 60724e2e5e52806499dc88fd01d3ae70, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -300,9 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
-  acceleration: 15
-  maxVerticalSpeed: 3
-  rotationAmount: 5
+  acceleration: 50
+  maxVerticalSpeed: 50
+  rotationAmount: 0.05
 --- !u!212 &212002848626455248
 SpriteRenderer:
   m_ObjectHideFlags: 1

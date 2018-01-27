@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour {
 
-	public float playerId;	
+	public int playerId;	
 	public float acceleration = 40f;	
 	public float maxVerticalSpeed = 99f;	
 	public float rotationAmount = 0.1f;	
@@ -17,6 +17,8 @@ public class Move : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
+
+
 	
 	// Update is called once per frame
 	void Update () {

@@ -9,8 +9,12 @@ public class RoadScroll : MonoBehaviour
     public float speed = 0.2f;
 
     public GameObject[] tracks;
-
-    private float offset = 0f;
+	
+	[Tooltip("Piloté automatiquement, ne pas modifier")]
+	public float offset = 0f;
+	[Tooltip("Piloté automatiquement, ne pas modifier")]
+	// TODO : move to Party and use A delegate event to inform of offsetChange
+	public float trackFinishedCount = 0f;
 
     private GameObject currentTrack = null;
     private GameObject nextTrack = null;
@@ -44,6 +48,7 @@ public class RoadScroll : MonoBehaviour
             Destroy(currentTrack);
             currentTrack = nextTrack;
             nextTrack = instantiateNextTrack();
+			trackFinishedCount ++;
         }
         currentTrack.transform.position = new Vector3(startPosCurrent.x - offset, currentTrack.transform.position.y, currentTrack.transform.position.z);
         nextTrack.transform.position = new Vector3(startPosNext.x - offset, nextTrack.transform.position.y, nextTrack.transform.position.z);
