@@ -6,8 +6,8 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
 
-    public static float MAX_VOLUME = 0.32f;
-    public static float MIN_VOLUME = 0.12f;
+    public static float MAX_VOLUME = 0.35f;
+    public static float MIN_VOLUME = 0.15f;
 
     public int playerId;
     public float verticalAcceleration = 25f;
@@ -79,7 +79,7 @@ public class Move : MonoBehaviour
 
         if (Mathf.Abs(rb.velocity.y) < maxVerticalSpeed)
         {
-            rb.AddForce(new Vector2(0, Input.GetAxis("Vertical1") * verticalAcceleration));
+            rb.AddForce(new Vector2(0, Input.GetAxis("Vertical" + playerId) * verticalAcceleration));
         }
         float targetVelocity = HorizontalSpeed;
         float currentVelocity = rb.velocity.x;

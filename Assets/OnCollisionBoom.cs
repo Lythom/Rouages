@@ -25,7 +25,6 @@ public class OnCollisionBoom : MonoBehaviour
 
         audioSource.Stop();
         audioSource.pitch = Random.Range(2, 3.3f);
-		Debug.Log(other.relativeVelocity.magnitude);
 		audioSource.volume = Mathf.Min(other.relativeVelocity.magnitude / 20, 0.35f);
         audioSource.Play();
     }
