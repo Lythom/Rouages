@@ -7,16 +7,31 @@ public class Move : MonoBehaviour {
 	public float playerId;	
 	public float acceleration = 40f;	
 	public float maxVerticalSpeed = 99f;	
-	public float rotationAmount = 0.1f;	
+	public float rotationAmount = 0.5f;	
 	private Rigidbody2D rb;
 	private Vector2 movingVector;
 
+	private float gearAmount = 0;
 	private float horizontalSpeed = 0;
 	
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 	}
+
+	private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Collectible")) {
+			if (gearAmount < 7) {
+				gearAmount++;
+				horizontalSpeed = gearAmount * 0.1f;
+				foreach (var item in this.transform)
+				{
+					
+				}
+			}
+        	Destroy(other.gameObject);
+		}
+    }
 	
 	// Update is called once per frame
 	void Update () {
