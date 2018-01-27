@@ -554,6 +554,8 @@ MonoBehaviour:
   speed: 0.2
   tracks:
   - {fileID: 1111149441051512, guid: 155093c61b969754d8adf6f9c7981d54, type: 2}
+  - {fileID: 1111149441051512, guid: 75467eb15693e48cfbffe7e806bf5aab, type: 2}
+  - {fileID: 1111149441051512, guid: 33a7c82ab99c44960a9d809f66bf57eb, type: 2}
   offset: 0
   trackFinishedCount: 0
 --- !u!4 &1541328681
