@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerId: 1
   verticalAcceleration: 25
-  horizontalAcceleration: 0.1
+  horizontalAcceleration: 0.02
   horizontalMaxSpeedPerGear: 0.17
   maxVerticalSpeed: 99
   rotationAmount: 0.05

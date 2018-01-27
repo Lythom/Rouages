@@ -16,6 +16,8 @@ public class Move : MonoBehaviour
     public float maxVerticalSpeed = 99f;
     public float rotationAmount = 0.05f;
 
+    private bool hooking = false;
+
     public AudioClip[] engineSounds;
     public AudioClip[] levelUpSounds;
 
@@ -93,6 +95,17 @@ public class Move : MonoBehaviour
             PlayAudio(engineSounds[System.Math.Min(GearAmount, engineSounds.Length - 1)], true);
         }
         audioSource.volume = audioSource.volume + (MIN_VOLUME - audioSource.volume) * 0.15f;
+
+        if (Input.GetButtonDown("Fire" + playerId) || Input.GetAxis("Fire" + playerId) != 0)
+        {
+            if(!hooking) {
+                Debug.Log("Fire" + playerId);
+                hooking = true;
+            }
+        } else if (hooking) {
+            Debug.Log("Dehooking " + playerId);            
+            hooking = false;
+        }
     }
 
     public void PlayAudio(AudioClip clip, bool loop)
