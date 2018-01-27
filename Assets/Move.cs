@@ -16,7 +16,12 @@ public class Move : MonoBehaviour
     public float maxVerticalSpeed = 99f;
     public float rotationAmount = 0.05f;
 
-    private bool hooking = false;
+    public Hook hook;
+
+    private bool Hooking
+    {
+        get { return hook != null && hook.gameObject.activeSelf; }
+    }
 
     public AudioClip[] engineSounds;
     public AudioClip[] levelUpSounds;
@@ -32,11 +37,13 @@ public class Move : MonoBehaviour
         get { return gearAmount; }
         set
         {
-            audioSource.Stop();
-            if (gearAmount < value) PlayAudio(levelUpSounds[System.Math.Min(value - 1, levelUpSounds.Length - 1)], false);
-            audioSource.volume = MAX_VOLUME;
-            gearAmount = value;
-            updateGearVisuals();
+            if (value <= 7 && value >= 0) {
+                audioSource.Stop();
+                if (gearAmount < value) PlayAudio(levelUpSounds[System.Math.Min(value - 1, levelUpSounds.Length - 1)], false);
+                audioSource.volume = MAX_VOLUME;
+                gearAmount = value;
+                updateGearVisuals();
+            }
         }
     }
 
@@ -67,10 +74,7 @@ public class Move : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Collectible"))
         {
-            if (GearAmount < 7)
-            {
-                GearAmount++;
-            }
+            GearAmount++;
             Destroy(other.gameObject);
         }
     }
@@ -84,10 +88,17 @@ public class Move : MonoBehaviour
         {
             rb.AddForce(new Vector2(0, Input.GetAxis("Vertical" + playerId) * verticalAcceleration));
         }
-        float targetVelocity = HorizontalSpeed;
-        float currentVelocity = rb.velocity.x;
-        float step = (targetVelocity - currentVelocity) * horizontalAcceleration;
-        rb.velocity = new Vector2(rb.velocity.x + step, rb.velocity.y * 0.9f);
+        
+
+        if (Hooking && hook.Hooked != null) {
+            rb.AddForce(new Vector2(0, (hook.Hooked.position.y - this.transform.position.y) * 20f));
+            rb.velocity = new Vector2(hook.Hooked.GetComponent<Rigidbody2D>().velocity.x, rb.velocity.y * 0.9f);
+        } else {
+            float targetVelocity = HorizontalSpeed;
+            float currentVelocity = rb.velocity.x;
+            float step = (targetVelocity - currentVelocity) * horizontalAcceleration;
+            rb.velocity = new Vector2(rb.velocity.x + step, rb.velocity.y * 0.9f);
+        }
 
         this.transform.rotation = new Quaternion(0, 0, rb.velocity.y * rotationAmount, 1);
 
@@ -99,14 +110,17 @@ public class Move : MonoBehaviour
 
         if (Input.GetButtonDown("Fire" + playerId) || Input.GetAxis("Fire" + playerId) != 0)
         {
-            if(!hooking) {
-                Debug.Log("Fire" + playerId);
-                hooking = true;
+            if (!Hooking)
+            {
+                hook.fire();
             }
-        } else if (hooking) {
-            Debug.Log("Dehooking " + playerId);            
-            hooking = false;
         }
+        else if (Hooking)
+        {
+            hook.dehook();
+        }
+
+        
     }
 
     public void PlayAudio(AudioClip clip, bool loop)

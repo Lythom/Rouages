@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Collectible
   - gear
+  - Hook
+  - Car
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Cars
+  - Hooks
+  - Collectible
   - 
   - 
   - 
