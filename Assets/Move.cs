@@ -12,44 +12,49 @@ public class Move : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movingVector;
 
-    public float gearAmount = 0;
-    private float horizontalSpeed = 0;
+    public float gearAmount = 3;
+    private float horizontalSpeed;
 
     // Use this for initialization
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
+    void Start () {
+        rb = GetComponent<Rigidbody2D> ();
+        horizontalSpeed = (gearAmount - 3) * 0.1f;
+        int i = 0;
+        foreach (Transform item in this.transform) {
+            i++;
+            if (gearAmount < i) {
+                item.gameObject.SetActive (false);
+            }
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Collectible"))
-        {
-            if (gearAmount < 7)
-            {
+    private void OnCollisionEnter2D (Collision2D other) {
+        if (other.gameObject.CompareTag ("Collectible")) {
+            if (gearAmount < 7) {
                 gearAmount++;
-                horizontalSpeed = gearAmount * 0.1f;
-                foreach (var item in this.transform)
-                {
-
+                horizontalSpeed = (gearAmount - 3) * 0.1f;
+                int i = 0;
+                foreach (Transform item in this.transform) {
+                    i++;
+                    if (gearAmount >= i) {
+                        item.gameObject.SetActive (true);
+                    }
                 }
             }
-            Destroy(other.gameObject);
+            Destroy (other.gameObject);
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update () {
         if (rb == null) return;
 
-        movingVector = new Vector2(horizontalSpeed, Input.GetAxis("Vertical"));
-        if (Mathf.Abs(rb.velocity.y) < maxVerticalSpeed)
-        {
-            rb.AddForce(movingVector * acceleration);
+        movingVector = new Vector2 (horizontalSpeed, Input.GetAxis ("Vertical"));
+        if (Mathf.Abs (rb.velocity.y) < maxVerticalSpeed) {
+            rb.AddForce (movingVector * acceleration);
         }
-        rb.velocity = new Vector2(horizontalSpeed, rb.velocity.y * 0.9f);
+        rb.velocity = new Vector2 (horizontalSpeed, rb.velocity.y * 0.9f);
 
-        this.transform.rotation = new Quaternion(0, 0, rb.velocity.y * rotationAmount, 1);
+        this.transform.rotation = new Quaternion (0, 0, rb.velocity.y * rotationAmount, 1);
     }
 }
