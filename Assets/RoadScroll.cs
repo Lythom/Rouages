@@ -6,12 +6,12 @@ using System.Linq;
 public class RoadScroll : MonoBehaviour
 {
 
-    public float speed = 0.2f;
+    public double speed = 0.15f;
 
     public GameObject[] tracks;
 	
 	[Tooltip("Piloté automatiquement, ne pas modifier")]
-	public float offset = 0f;
+	public double offset = 0f;
 	[Tooltip("Piloté automatiquement, ne pas modifier")]
 	// TODO : move to Party and use A delegate event to inform of offsetChange
 	public float trackFinishedCount = 0f;
@@ -50,8 +50,8 @@ public class RoadScroll : MonoBehaviour
             nextTrack = instantiateNextTrack();
 			trackFinishedCount ++;
         }
-        currentTrack.transform.position = new Vector3(startPosCurrent.x - offset, currentTrack.transform.position.y, currentTrack.transform.position.z);
-        nextTrack.transform.position = new Vector3(startPosNext.x - offset, nextTrack.transform.position.y, nextTrack.transform.position.z);
+        currentTrack.transform.position = new Vector3(startPosCurrent.x - (float)offset, currentTrack.transform.position.y, currentTrack.transform.position.z);
+        nextTrack.transform.position = new Vector3(startPosNext.x - (float)offset, nextTrack.transform.position.y, nextTrack.transform.position.z);
 
     }
 }

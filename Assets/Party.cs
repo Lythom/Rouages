@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Party : MonoBehaviour
 {
 
+    public static int INITIAL_GEAR_AMOUNT = 3;
+
     public List<Move> cars;
     public Transform losePosition;
     public Transform winPosition;
+
+    public Transform canvas;
+    public GameObject playerScorePrefab;
 
     public RoadScroll roadScroll;
 
@@ -19,6 +25,7 @@ public class Party : MonoBehaviour
     public int partyLength = 20;
 
     private Dictionary<int, int> scores = new Dictionary<int, int>();
+    private Dictionary<int, Text> scoreTexts = new Dictionary<int, Text>();
 
     // Use this for initialization
     void Start()
@@ -36,18 +43,23 @@ public class Party : MonoBehaviour
             if (c.transform.position.x > winPosition.position.x)
             {
                 scores[c.playerId] = scores[c.playerId] + 1;
+                scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
                 c.transform.position = getStartPosition(c);
+                c.gearAmount = INITIAL_GEAR_AMOUNT;
             }
             if (c.transform.position.x < losePosition.position.x)
             {
                 scores[c.playerId] = System.Math.Max(0, scores[c.playerId] - 1);
+                scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
                 c.transform.position = getStartPosition(c);
+                c.gearAmount = INITIAL_GEAR_AMOUNT;
             }
         });
 
         if (roadScroll.trackFinishedCount >= partyLength)
         {
             roadScroll.enabled = false;
+            cars.ForEach(car => car.enabled = false);
         }
     }
 
@@ -63,7 +75,14 @@ public class Party : MonoBehaviour
 
     private void initScores()
     {
-        cars.ForEach(car => scores[car.playerId] = 0);
+        cars.ForEach(c =>
+        {
+            scores[c.playerId] = 0;
+            scoreTexts[c.playerId] = Instantiate(playerScorePrefab, canvas).GetComponent<Text>();
+            scoreTexts[c.playerId].transform.position = new Vector2(-50 + 150 * c.playerId, 340f);
+            scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
+			
+        });
     }
 
     private float GetStartX()
