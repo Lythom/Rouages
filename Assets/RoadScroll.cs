@@ -12,7 +12,7 @@ public class RoadScroll : MonoBehaviour
 
     public GameObject[] tracks;
 
-    public GameObject tutoTrack;  
+    public GameObject tutoTrack;
 	
 	[Tooltip("Piloté automatiquement, ne pas modifier")]
 	public double offset = 0f;
@@ -22,8 +22,8 @@ public class RoadScroll : MonoBehaviour
     public bool tutorial;
 
     private GameObject[] compatibleTracks;
-    public GameObject currentTrack = null;
-    public GameObject nextTrack = null;
+    private GameObject currentTrack = null;
+    private GameObject nextTrack = null;
 
     private Vector3 startPosCurrent = new Vector3(TRACK_WIDTH / 4, 0, 0);
     private Vector3 startPosNext = new Vector3(TRACK_WIDTH / 4 + TRACK_WIDTH, 0, 0);
