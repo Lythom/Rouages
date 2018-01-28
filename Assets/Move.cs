@@ -120,6 +120,8 @@ public class Move : MonoBehaviour
             hook.dehook();
         }
 
+        // if(this.transform.z > )
+        // this.gameObject.layer = LayerMask.NameToLayer("Flying");
         
     }
 
