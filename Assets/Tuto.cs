@@ -51,6 +51,7 @@ public class Tuto : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        GameObject.Find("PlayAgain").GetComponent<TextMesh>().text = "Starting...";
         party.placeCars();
         yield return new WaitForSeconds(3);
         party.enabled = true;

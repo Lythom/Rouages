@@ -25,12 +25,11 @@ public class Party : MonoBehaviour
 
     [Tooltip("Number of tracks before the game ends and the scores are reset.")]
     public int partyLength = 20;
+    public GameObject tutoText;    
 
     private Dictionary<int, int> scores = new Dictionary<int, int>();
     private Dictionary<int, Text> scoreTexts = new Dictionary<int, Text>();
     private AudioSource audioSource;
-
-    private GameObject tutoText;
 
     // Use this for initialization
     void OnEnable()
