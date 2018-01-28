@@ -141,7 +141,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalRotation.x
@@ -167,10 +167,10 @@ Prefab:
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
-    - target: {fileID: 212151615651722084, guid: bcee15c91e3e9e14aa06839df994ae71,
+    - target: {fileID: 212900942513843428, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
-      propertyPath: m_Size.y
-      value: -0.07
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
@@ -198,7 +198,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalRotation.x
@@ -481,11 +481,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1261502555 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114891710731603410, guid: bcee15c91e3e9e14aa06839df994ae71,
@@ -530,7 +525,7 @@ MonoBehaviour:
   - {fileID: 460526}
   losePosition: {fileID: 1910093188}
   winPosition: {fileID: 262363140}
-  canvas: {fileID: 1219451103}
+  canvas: {fileID: 0}
   playerScorePrefab: {fileID: 1691870886986442, guid: 14f0bcc99ef966747bb1fac06e0b0bcc,
     type: 2}
   roadScroll: {fileID: 1541328680}
@@ -759,7 +754,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalRotation.x
@@ -829,7 +824,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978272941928806, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalRotation.x
@@ -919,7 +914,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.29411763, g: 0.1746808, b: 0.09731834, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -928,7 +923,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 43.994854
+  field of view: 48.34681
   orthographic: 0
   orthographic size: 6.4
   m_Depth: -1

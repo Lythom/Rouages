@@ -52,7 +52,7 @@ public class Party : MonoBehaviour
             {
                 scores[c.playerId] = scores[c.playerId] + 1;
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
-                c.transform.position = getStartPosition(c);
+                c.moveTo(getStartPosition(c));
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
                 audioSource.Stop();
                 audioSource.Play();
@@ -61,7 +61,7 @@ public class Party : MonoBehaviour
             {
                 scores[c.playerId] = System.Math.Max(0, scores[c.playerId] - 1);
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
-                c.transform.position = getStartPosition(c);
+                c.moveTo(getStartPosition(c));
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
             }
         });
@@ -85,12 +85,15 @@ public class Party : MonoBehaviour
 
     private void placeCars()
     {
-        cars.ForEach(car => car.transform.position = getStartPosition(car));
+        cars.ForEach(c =>
+        {
+            c.moveTo(getStartPosition(c));
+        });
     }
 
-    private Vector2 getStartPosition(Move car)
+    private Vector3 getStartPosition(Move car)
     {
-        return new Vector2(GetStartX(), -(initialSpacing * cars.Count) / 2 + initialSpacing * car.playerId);
+        return new Vector3(GetStartX(), -(initialSpacing * cars.Count) / 2 + initialSpacing * car.playerId, -3);
     }
 
     private void initScores()
@@ -102,7 +105,7 @@ public class Party : MonoBehaviour
             RectTransform t = scoreTexts[c.playerId].transform as RectTransform;
             t.anchoredPosition = new Vector2(-150 + 450 * c.playerId, -110f);
             scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
-			
+
         });
     }
 

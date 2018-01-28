@@ -19,11 +19,14 @@ public class Move : MonoBehaviour
 
     public Hook hook;
 
+    private bool isHookingButtonReleased = true;
     private bool Hooking
     {
         get { return hook != null && hook.gameObject.activeSelf; }
     }
 
+    public SpriteRenderer wings;
+    public SpriteRenderer shadow;
     public AudioClip[] engineSounds;
     public AudioClip[] levelUpSounds;
     public AudioClip[] pickupSounds;
@@ -32,6 +35,8 @@ public class Move : MonoBehaviour
 
     private int gearAmount = 3;
     private AudioSource audioSource;
+    private bool flying = false;
+    private bool autoDriving;
 
     public int GearAmount
     {
@@ -53,7 +58,7 @@ public class Move : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponents<AudioSource>().Where(a => a.clip == null).First();
@@ -65,8 +70,11 @@ public class Move : MonoBehaviour
         int i = 0;
         foreach (Transform item in this.transform)
         {
-            i++;
-            item.gameObject.SetActive(GearAmount >= i);
+            if (item.CompareTag("cargear"))
+            {
+                i++;
+                item.gameObject.SetActive(GearAmount >= i);
+            }
         }
     }
 
@@ -88,12 +96,15 @@ public class Move : MonoBehaviour
         {
             rb.AddForce(new Vector2(0, Input.GetAxis("Vertical" + playerId) * verticalAcceleration));
         }
-        
 
-        if (Hooking && hook.Hooked != null) {
+
+        if (Hooking && hook.Hooked != null)
+        {
             rb.AddForce(new Vector2(0, (hook.Hooked.position.y - this.transform.position.y) * 20f));
             rb.velocity = new Vector2(hook.Hooked.GetComponent<Rigidbody2D>().velocity.x, rb.velocity.y * 0.9f);
-        } else {
+        }
+        else
+        {
             float targetVelocity = HorizontalSpeed;
             float currentVelocity = rb.velocity.x;
             float step = (targetVelocity - currentVelocity) * horizontalAcceleration;
@@ -110,20 +121,123 @@ public class Move : MonoBehaviour
 
         if (Input.GetButtonDown("Fire" + playerId) || Input.GetAxis("Fire" + playerId) != 0)
         {
-            if (!Hooking)
+            if (!Hooking && isHookingButtonReleased)
             {
                 // TODO: lose 1 gear here and not when hook worked !
                 hook.fire();
+                isHookingButtonReleased = false;
             }
         }
-        else if (Hooking)
+        else
         {
-            hook.dehook();
+            if (Hooking)
+            {
+                hook.dehook();
+            }
+            isHookingButtonReleased = true;
+
         }
 
         foreach (Transform item in this.transform)
         {
-            item.gameObject.transform.Rotate(0, 0, gearAmount);
+            if (item.CompareTag("cargear"))
+            {
+                item.gameObject.transform.Rotate(0, 0, gearAmount);
+            }
+        }
+
+        var p = this.transform.position;
+        if (p.z < -0.1)
+        {
+            fly();
+            shadow.transform.position = new Vector3(p.x, p.y, 0);
+            shadow.transform.localScale = new Vector3((9 + p.z) / 9, (9 + p.z) / 9, 1);
+        }
+        else
+        {
+            land();
+            // out = sent left to lose
+            if (Math.Abs(this.transform.position.y) > 5)
+            {
+                rb.velocity = new Vector2(-12, 0);
+            }
+        }
+        if (this.hook.Hooked != null)
+        {
+            displayWings();
+            this.transform.position = new Vector3(p.x, p.y, p.z <= -3 ? -3f : p.z - 0.07f);
+        }
+        else
+        {
+            this.transform.position = new Vector3(p.x, p.y, p.z >= 0 ? 0f : p.z + 0.09f - GearAmount * 0.01f);
+            if (this.transform.position.z > -0.1)
+            {
+                hideWings();
+            }
+        }
+    }
+
+    public void moveTo(Vector3 position)
+    {
+        if (!autoDriving)
+        {
+            autoDriving = true;
+            if (rb != null) rb.velocity = new Vector2(0, 0);
+            StartCoroutine(autoDrive(position));
+        }
+    }
+
+    private IEnumerator autoDrive(Vector3 dest)
+    {
+        float elapsedTime = 0;
+        Vector3 startingPos = transform.position;
+        while (elapsedTime < 3)
+        {
+            transform.position = Vector3.Lerp(startingPos, dest, (elapsedTime / 3));
+            elapsedTime += Time.deltaTime;
+            yield return null;            
+        }
+        autoDriving = false;
+        yield return null;
+    }
+
+    private void hideWings()
+    {
+        wings.enabled = false;
+        shadow.enabled = false;
+    }
+
+    private void displayWings()
+    {
+        wings.enabled = true;
+        shadow.enabled = true;
+    }
+
+    private List<SpriteRenderer> GetAllSpriteRenderers()
+    {
+        return this.GetComponentsInChildren<SpriteRenderer>()
+        .Concat(this.GetComponents<SpriteRenderer>())
+        .ToList();
+    }
+    private void land()
+    {
+        if (this.flying)
+        {
+            hideWings();
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
+            GetAllSpriteRenderers().ForEach(sr => sr.sortingLayerName = "Default");
+            this.flying = false;
+        }
+    }
+
+    private void fly()
+    {
+        if (!this.flying)
+        {
+            displayWings();
+            this.gameObject.layer = LayerMask.NameToLayer("Flying");
+            GetAllSpriteRenderers().ForEach(sr => sr.sortingLayerName = "Flying");
+            this.flying = true;
         }
     }
 
