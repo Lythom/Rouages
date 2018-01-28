@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Party : MonoBehaviour
@@ -17,6 +18,7 @@ public class Party : MonoBehaviour
     public GameObject playerScorePrefab;
 
     public RoadScroll roadScroll;
+    public Tuto tuto;
 
     [Tooltip("How much cars are far from each other at start")]
     public float initialSpacing = 2f;
@@ -28,13 +30,17 @@ public class Party : MonoBehaviour
     private Dictionary<int, Text> scoreTexts = new Dictionary<int, Text>();
     private AudioSource audioSource;
 
+    private GameObject tutoText;
+
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
         audioSource = GetComponent<AudioSource>();
         placeCars();
         initScores();
         roadScroll.trackFinishedCount = 0;
+        tutoText = GameObject.Find("PlayAgain");
+        tutoText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,9 +67,19 @@ public class Party : MonoBehaviour
         });
 
         if (roadScroll.trackFinishedCount >= partyLength)
-        {
-            roadScroll.enabled = false;
-            cars.ForEach(car => car.enabled = false);
+        {   
+            // Go to tuto and set RoadScroll in tuto mode
+            roadScroll.tutorial = true;
+            roadScroll.trackFinishedCount = 0;
+            // roadScroll.currentTrack = Instantiate(roadScroll.tutoTrack);
+            // roadScroll.nextTrack = Instantiate(roadScroll.tutoTrack);
+            roadScroll.offset = 64;
+
+            tuto.enabled = true;
+            tuto.placeCars();
+            tutoText.SetActive(true);
+
+            this.enabled = false;     
         }
     }
 
