@@ -21,19 +21,24 @@ public class Tuto : MonoBehaviour
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         OnEnable();
     }
 
     void OnEnable()
     {
-       // audioSource = GetComponent<AudioSource>();
-        placeCars();
+        // audioSource = GetComponent<AudioSource>();
+        if (this.enabled)
+        {
+            placeCars();
+        }
     }
 
     void Update()
     {
-        movedCars = cars.Where(c => {
+        movedCars = cars.Where(c =>
+        {
             return c.transform.position.y > 0.2f;
         }).ToArray();
 
@@ -46,17 +51,21 @@ public class Tuto : MonoBehaviour
 
     IEnumerator StartGame()
     {
+        party.placeCars();
         yield return new WaitForSeconds(3);
         party.enabled = true;
-        roadScroll.tutorial = false;            
+        roadScroll.tutorial = false;
         this.enabled = false;
     }
 
-    
+
     public void placeCars()
     {
         // Set position depending on car id
-        cars.ForEach(car => car.transform.position = new Vector2(GetStartX() + car.playerId * 2.5f - 6.5f, -2));
+        cars.ForEach(car => {
+            car.moveTo(new Vector3(GetStartX() + car.playerId * 2.5f - 6.5f, -2, -3));
+            car.GearAmount = 3;
+        });
     }
 
     private float GetStartX()

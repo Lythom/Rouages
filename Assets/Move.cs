@@ -7,8 +7,8 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
 
-    public static float MAX_VOLUME = 0.35f;
-    public static float MIN_VOLUME = 0.17f;
+    public static float MAX_VOLUME = 0.33f;
+    public static float MIN_VOLUME = 0.11f;
 
     public int playerId;
     public float verticalAcceleration = 25f;
@@ -149,6 +149,7 @@ public class Move : MonoBehaviour
         var p = this.transform.position;
         if (p.z < -0.1)
         {
+            displayWings();
             fly();
             shadow.transform.position = new Vector3(p.x, p.y, 0);
             shadow.transform.localScale = new Vector3((9 + p.z) / 9, (9 + p.z) / 9, 1);
@@ -234,7 +235,6 @@ public class Move : MonoBehaviour
     {
         if (!this.flying)
         {
-            displayWings();
             this.gameObject.layer = LayerMask.NameToLayer("Flying");
             GetAllSpriteRenderers().ForEach(sr => sr.sortingLayerName = "Flying");
             this.flying = true;

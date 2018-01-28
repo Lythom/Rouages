@@ -35,12 +35,14 @@ public class Party : MonoBehaviour
     // Use this for initialization
     void OnEnable()
     {
-        audioSource = GetComponent<AudioSource>();
-        placeCars();
-        initScores();
-        roadScroll.trackFinishedCount = 0;
-        tutoText = GameObject.Find("PlayAgain");
-        tutoText.SetActive(false);
+        if (this.enabled)
+        {
+            audioSource = GetComponent<AudioSource>();
+            initScores();
+            roadScroll.trackFinishedCount = 0;
+            tutoText = GameObject.Find("PlayAgain");
+            tutoText.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -67,7 +69,7 @@ public class Party : MonoBehaviour
         });
 
         if (roadScroll.trackFinishedCount >= partyLength)
-        {   
+        {
             // Go to tuto and set RoadScroll in tuto mode
             roadScroll.tutorial = true;
             roadScroll.trackFinishedCount = 0;
@@ -79,16 +81,18 @@ public class Party : MonoBehaviour
             tuto.placeCars();
             tutoText.SetActive(true);
 
-            this.enabled = false;     
+            this.enabled = false;
         }
     }
 
-    private void placeCars()
+    public void placeCars()
     {
         cars.ForEach(c =>
         {
             c.moveTo(getStartPosition(c));
+            c.GearAmount = INITIAL_GEAR_AMOUNT;
         });
+
     }
 
     private Vector3 getStartPosition(Move car)
