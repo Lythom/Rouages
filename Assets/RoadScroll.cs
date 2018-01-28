@@ -18,7 +18,7 @@ public class RoadScroll : MonoBehaviour
 	// TODO : move to Party and use A delegate event to inform of offsetChange
 	public float trackFinishedCount = 0f;
 
-    private List<GameObject> compatibleTracks;
+    private GameObject[] compatibleTracks;
     private GameObject currentTrack = null;
     private GameObject nextTrack = null;
 
@@ -28,29 +28,28 @@ public class RoadScroll : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
-        currentTrack = Instantiate(tracks[Random.Range(0, tracks.Length)], this.transform);
+    {   
+        // Starting tile is the first of the array
+        currentTrack = Instantiate(tracks[0], this.transform);
         currentTrack.transform.position = startPosCurrent;
         nextTrack = instantiateNextTrack();
     }
 
     private GameObject instantiateNextTrack()
     {
-        compatibleTracks = new List<GameObject>();
         var currentTrackNumber = Regex.Match(currentTrack.name, @"\d+").Value;
         var currentTrackNumberArray = currentTrackNumber.ToCharArray();
 
-        foreach (GameObject item in tracks)
-        {
+        compatibleTracks = tracks.Where(item => {
             var itemNumber = Regex.Match(item.name, @"\d+").Value;
             var itemNumberArray = itemNumber.ToCharArray();
-            
-            if (currentTrackNumberArray[1] == itemNumberArray[0])
-                compatibleTracks.Add(item);                
-        }
+            var output = int.Parse(currentTrackNumberArray[1].ToString());
+            var input = int.Parse(itemNumberArray[0].ToString());
+
+            return output == input;
+        }).ToArray();
         
-        compatibleTracks.ToArray();
-        var n = Instantiate(compatibleTracks[Random.Range(0, compatibleTracks.Count)]);
+        var n = Instantiate(compatibleTracks[Random.Range(0, compatibleTracks.Length)]);
         n.transform.position = startPosNext;
         return n;
     }

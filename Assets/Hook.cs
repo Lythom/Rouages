@@ -16,7 +16,7 @@ public class Hook : MonoBehaviour
     }
 
     private Transform target;
-    private Vector3 hookedRelativePosition;
+    private Vector3 hookedRelativePosition = Vector3.zero;
     private Vector3 shootDirection;
 
     private Rigidbody2D rb;
@@ -39,7 +39,8 @@ public class Hook : MonoBehaviour
     {
         if (target == null) {
             target = otherCar.transform;
-            hookedRelativePosition = this.transform.position - target.transform.position;
+            //hookedRelativePosition = this.transform.position - target.transform.position;
+            this.GetComponentInChildren<SpriteRenderer>().enabled = false;
             target.GetComponent<Move>().GearAmount++;
             thrower.GetComponent<Move>().GearAmount--;
         }
@@ -51,15 +52,17 @@ public class Hook : MonoBehaviour
     {
         rb.position = this.transform.position = thrower.position + Vector3.right;
         var initialVelocity = thrower.GetComponent<Rigidbody2D>().velocity;
-        shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.6f, 0);
+        shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.4f, 0);
         this.gameObject.SetActive(true);
         Update();
     }
 
     public void dehook()
     {
+        // TODO: Get Nothing back if no-one was hooked
         if (target != null) target.GetComponent<Move>().GearAmount -= 2;
-        if (thrower != null) thrower.GetComponent<Move>().GearAmount += 2;
+        if (thrower != null && target != null) thrower.GetComponent<Move>().GearAmount += 2;
+            this.GetComponentInChildren<SpriteRenderer>().enabled = true;        
         this.gameObject.SetActive(false);
         target = null;
     }

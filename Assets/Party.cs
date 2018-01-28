@@ -83,7 +83,8 @@ public class Party : MonoBehaviour
         {
             scores[c.playerId] = 0;
             scoreTexts[c.playerId] = Instantiate(playerScorePrefab, canvas).GetComponent<Text>();
-            scoreTexts[c.playerId].transform.position = Camera.main.ScreenToWorldPoint(new Vector2(-50 + 150 * c.playerId, 340f));
+            RectTransform t = scoreTexts[c.playerId].transform as RectTransform;
+            t.anchoredPosition = new Vector2(-150 + 450 * c.playerId, -110f);
             scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
 			
         });

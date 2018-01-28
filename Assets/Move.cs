@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,13 +38,12 @@ public class Move : MonoBehaviour
         get { return gearAmount; }
         set
         {
-            if (value <= 7 && value >= 0) {
-                audioSource.Stop();
-                if (gearAmount < value) PlayAudio(levelUpSounds[System.Math.Min(value - 1, levelUpSounds.Length - 1)], false);
-                audioSource.volume = MAX_VOLUME;
-                gearAmount = value;
-                updateGearVisuals();
-            }
+            int amount = Math.Max(Math.Min(value, 7), 0);
+            audioSource.Stop();
+            if (gearAmount < amount) PlayAudio(levelUpSounds[System.Math.Min(amount - 1, levelUpSounds.Length - 1)], false);
+            audioSource.volume = MAX_VOLUME;
+            gearAmount = amount;
+            updateGearVisuals();
         }
     }
 
@@ -112,6 +112,7 @@ public class Move : MonoBehaviour
         {
             if (!Hooking)
             {
+                // TODO: lose 1 gear here and not when hook worked !
                 hook.fire();
             }
         }
@@ -120,9 +121,10 @@ public class Move : MonoBehaviour
             hook.dehook();
         }
 
-        // if(this.transform.z > )
-        // this.gameObject.layer = LayerMask.NameToLayer("Flying");
-        
+        foreach (Transform item in this.transform)
+        {
+            item.gameObject.transform.Rotate(0, 0, gearAmount);
+        }
     }
 
     public void PlayAudio(AudioClip clip, bool loop)
