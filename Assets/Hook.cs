@@ -58,8 +58,9 @@ public class Hook : MonoBehaviour
 
     public void dehook()
     {
+        // TODO: Get Nothing back if no-one was hooked
         if (target != null) target.GetComponent<Move>().GearAmount -= 2;
-        if (thrower != null) thrower.GetComponent<Move>().GearAmount += 2;
+        if (thrower != null && target != null) thrower.GetComponent<Move>().GearAmount += 2;
         this.gameObject.SetActive(false);
         target = null;
     }
