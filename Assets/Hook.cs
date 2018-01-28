@@ -52,7 +52,7 @@ public class Hook : MonoBehaviour
     {
         rb.position = this.transform.position = thrower.position + Vector3.right;
         var initialVelocity = thrower.GetComponent<Rigidbody2D>().velocity;
-        shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.4f, 0);
+        shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.2f, 0);
         thrower.GetComponent<Move>().GearAmount--;
         this.gameObject.SetActive(true);
         Update();
@@ -86,7 +86,7 @@ public class Hook : MonoBehaviour
 
         if (target == null)
         {
-            rb.velocity = shootDirection * 4;
+            rb.velocity = shootDirection * 5.5f;
         }
         else
         {
