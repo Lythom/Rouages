@@ -72,10 +72,9 @@ public class Party : MonoBehaviour
             // Go to tuto and set RoadScroll in tuto mode
             roadScroll.tutorial = true;
             roadScroll.trackFinishedCount = 0;
-            // roadScroll.currentTrack = Instantiate(roadScroll.tutoTrack);
-            // roadScroll.nextTrack = Instantiate(roadScroll.tutoTrack);
             roadScroll.offset = 64;
 
+            tutoText.GetComponent<TextMesh>().text = "Move here \n to start";
             tuto.enabled = true;
             tuto.placeCars();
             tutoText.SetActive(true);
