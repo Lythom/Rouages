@@ -55,7 +55,7 @@ public class RoadScroll : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         offset = offset + speed;
         if (offset > TRACK_WIDTH)

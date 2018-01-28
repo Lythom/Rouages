@@ -28,7 +28,7 @@ public class Hook : MonoBehaviour
             // do hook
             hook(other.transform);
         }
-        else
+        else if (target == null)
         {
             dehook();
             // TODO play sound here
@@ -37,12 +37,12 @@ public class Hook : MonoBehaviour
 
     private void hook(Transform otherCar)
     {
-        if (target == null) {
+        if (target == null)
+        {
             target = otherCar.transform;
             //hookedRelativePosition = this.transform.position - target.transform.position;
             this.GetComponentInChildren<SpriteRenderer>().enabled = false;
             target.GetComponent<Move>().GearAmount++;
-            thrower.GetComponent<Move>().GearAmount--;
         }
         // TODO play sound here
 
@@ -53,6 +53,7 @@ public class Hook : MonoBehaviour
         rb.position = this.transform.position = thrower.position + Vector3.right;
         var initialVelocity = thrower.GetComponent<Rigidbody2D>().velocity;
         shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.4f, 0);
+        thrower.GetComponent<Move>().GearAmount--;
         this.gameObject.SetActive(true);
         Update();
     }
@@ -62,7 +63,7 @@ public class Hook : MonoBehaviour
         // TODO: Get Nothing back if no-one was hooked
         if (target != null) target.GetComponent<Move>().GearAmount -= 2;
         if (thrower != null && target != null) thrower.GetComponent<Move>().GearAmount += 2;
-            this.GetComponentInChildren<SpriteRenderer>().enabled = true;        
+        this.GetComponentInChildren<SpriteRenderer>().enabled = true;
         this.gameObject.SetActive(false);
         target = null;
     }
@@ -78,9 +79,9 @@ public class Hook : MonoBehaviour
     void Update()
     {
 
-        Vector3 direction = (thrower.transform.position - this.transform.position).normalized;
+        Vector3 direction = (thrower.transform.position - (target == null ? this.transform.position : target.position)).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion qDirection = Quaternion.AngleAxis(angle + 180f, Vector3.forward);
+        Quaternion qDirection = Quaternion.AngleAxis(angle + 180f, Vector3.forward) * Quaternion.AngleAxis((thrower.position.z - (target == null ? 0 : target.position.z)) * 17, Vector3.up);
         this.transform.rotation = qDirection;
 
         if (target == null)
@@ -91,7 +92,8 @@ public class Hook : MonoBehaviour
         {
             rb.position = this.transform.position = target.position + hookedRelativePosition;
             rb.velocity = Vector2.zero;
-            if(target.position.x < thrower.position.x) {
+            if (target.position.x < thrower.position.x)
+            {
                 dehook();
             }
         }
