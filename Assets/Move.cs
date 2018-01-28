@@ -44,9 +44,12 @@ public class Move : MonoBehaviour
         set
         {
             int amount = Math.Max(Math.Min(value, 7), 0);
-            audioSource.Stop();
-            if (gearAmount < amount) PlayAudio(levelUpSounds[System.Math.Min(amount - 1, levelUpSounds.Length - 1)], false);
-            audioSource.volume = MAX_VOLUME;
+            if (audioSource != null)
+            {
+                audioSource.Stop();
+                if (gearAmount < amount) PlayAudio(levelUpSounds[System.Math.Min(amount - 1, levelUpSounds.Length - 1)], false);
+                audioSource.volume = MAX_VOLUME;
+            }
             gearAmount = amount;
             updateGearVisuals();
         }
