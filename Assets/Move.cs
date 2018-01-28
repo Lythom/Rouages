@@ -121,7 +121,10 @@ public class Move : MonoBehaviour
             hook.dehook();
         }
 
-        
+        foreach (Transform item in this.transform)
+        {
+            item.gameObject.transform.Rotate(0, 0, gearAmount);
+        }
     }
 
     public void PlayAudio(AudioClip clip, bool loop)
