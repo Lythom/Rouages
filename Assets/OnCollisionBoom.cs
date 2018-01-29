@@ -16,11 +16,6 @@ public class OnCollisionBoom : MonoBehaviour
         audioSource = GetComponents<AudioSource>().Where(a => a.clip != null).First();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 	private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Collectible"))

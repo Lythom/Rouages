@@ -20,10 +20,11 @@ public class Tuto : MonoBehaviour {
 
     private Move[] movedCars;
     private bool starting;
+    private float carPlacedTime = 0;
 
     // Use this for initialization
     void Awake() {
-        if(helpText != null) GetComponent<MeshRenderer> ().sortingLayerName = "Flying";     
+        if(helpText != null) helpText.GetComponent<MeshRenderer> ().sortingLayerName = "Flying";     
     }
 
     void Start () {
@@ -34,7 +35,7 @@ public class Tuto : MonoBehaviour {
         // audioSource = GetComponent<AudioSource>();
         if (this.enabled) {
             placeCars ();
-            if(helpText != null) GetComponent<TextMesh> ().text = "Move here \n to start";
+            if(helpText != null) helpText.GetComponent<TextMesh> ().text = "Move here \n to start";
             starting = false;
         }
     }
@@ -44,7 +45,7 @@ public class Tuto : MonoBehaviour {
             return c.transform.position.y > 0.2f;
         }).ToArray ();
 
-        if (movedCars.Length == 4 && !starting) {
+        if (movedCars.Length == 4 && !starting && Time.time > carPlacedTime) {
             // Tuto over
             StartCoroutine (StartGame ());
             starting = true;
@@ -54,14 +55,16 @@ public class Tuto : MonoBehaviour {
             cars.ForEach (c => {
                 var target = getCarStart (c.playerId);
                 var move = (target - c.transform.position.x) * 0.4f;
-                c.transform.position = new Vector3 (c.transform.position.x + move, c.transform.position.y, c.transform.position.z);
+                float yPos = Mathf.Max(Mathf.Min(c.transform.position.y, 4f), -4f);
+                c.transform.position = new Vector3 (c.transform.position.x + move, yPos, c.transform.position.z);
+                c.tutoVisual.SetActive(c.transform.position.y <= 0.2f);
             });
         }
 
     }
 
     IEnumerator StartGame () {
-        GameObject.Find ("PlayAgain").GetComponent<TextMesh> ().text = "Starting...";
+        helpText.GetComponent<TextMesh> ().text = "Starting...";
         party.placeCars ();
         yield return new WaitForSeconds (3);
         party.enabled = true;
@@ -74,6 +77,7 @@ public class Tuto : MonoBehaviour {
     }
 
     public void placeCars () {
+        carPlacedTime = Time.time + 3f;
         // Set position depending on car id
         cars.ForEach (car => {
             car.moveTo (new Vector3 (getCarStart (car.playerId), -2, -3));

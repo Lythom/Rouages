@@ -55,7 +55,7 @@ public class Hook : MonoBehaviour
         shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.2f, 0);
         thrower.GetComponent<Move>().GearAmount--;
         this.gameObject.SetActive(true);
-        Update();
+        FixedUpdate();
     }
 
     public void dehook()
@@ -76,7 +76,7 @@ public class Hook : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         Vector3 direction = (thrower.transform.position - (target == null ? this.transform.position : target.position)).normalized;

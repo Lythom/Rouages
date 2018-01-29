@@ -143,11 +143,12 @@ public class Move : MonoBehaviour {
                 rb.velocity = new Vector2 (-12, 0);
             }
         }
+        float yPos = Mathf.Max(Mathf.Min(p.y, 4.8f), -4.8f);
         if (this.hook.Hooked != null) {
             displayWings ();
-            this.transform.position = new Vector3 (p.x, p.y, p.z <= -3 ? -3f : p.z - 0.07f);
+            this.transform.position = new Vector3 (p.x, yPos, p.z <= -3 ? -3f : p.z - 0.07f);
         } else {
-            this.transform.position = new Vector3 (p.x, p.y, p.z >= 0 ? 0f : p.z + 0.05f - GearAmount * 0.005f);
+            this.transform.position = new Vector3 (p.x, yPos, p.z >= 0 ? 0f : p.z + 0.05f - GearAmount * 0.005f);
             if (this.transform.position.z > -0.1) {
                 hideWings ();
             }

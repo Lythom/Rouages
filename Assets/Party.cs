@@ -45,7 +45,7 @@ public class Party : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         cars.ForEach(c =>
         {
@@ -100,6 +100,9 @@ public class Party : MonoBehaviour
 
     private void initScores()
     {
+        foreach(Transform t in canvas) {
+            Destroy(t.gameObject);
+        }
         cars.ForEach(c =>
         {
             scores[c.playerId] = 0;
