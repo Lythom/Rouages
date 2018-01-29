@@ -53,7 +53,7 @@ public class Party : MonoBehaviour
             {
                 scores[c.playerId] = scores[c.playerId] + 1;
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
-                c.moveTo(getStartPosition(c));
+                c.moveTo(getStartPosition(c), true);
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
                 audioSource.Stop();
                 audioSource.Play();
@@ -62,7 +62,7 @@ public class Party : MonoBehaviour
             {
                 scores[c.playerId] = System.Math.Max(0, scores[c.playerId] - 1);
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
-                c.moveTo(getStartPosition(c));
+                c.moveTo(getStartPosition(c), true);
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
             }
         });
@@ -74,7 +74,6 @@ public class Party : MonoBehaviour
             roadScroll.trackFinishedCount = 0;
             roadScroll.offset = 64;
 
-            tutoText.GetComponent<TextMesh>().text = "Move here \n to start";
             tuto.enabled = true;
             tuto.placeCars();
             tutoText.SetActive(true);
