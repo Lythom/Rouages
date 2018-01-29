@@ -27,6 +27,7 @@ public class Move : MonoBehaviour {
     public SpriteRenderer wings;
     public SpriteRenderer shadow;
     public Text playerText;
+    public GameObject tutoVisual;
     public AudioClip[] engineSounds;
     public AudioClip[] levelUpSounds;
     public AudioClip[] pickupSounds;

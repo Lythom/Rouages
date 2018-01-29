@@ -88,6 +88,7 @@ public class Party : MonoBehaviour
         {
             c.moveTo(getStartPosition(c));
             c.GearAmount = INITIAL_GEAR_AMOUNT;
+            c.tutoVisual.SetActive(false);        
         });
 
     }

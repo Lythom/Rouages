@@ -52,7 +52,9 @@ public class Tuto : MonoBehaviour {
 
         if (!starting) {
             cars.ForEach (c => {
-                c.transform.position = new Vector3 (getCarStart (c.playerId), c.transform.position.y, c.transform.position.z);
+                var target = getCarStart (c.playerId);
+                var move = (target - c.transform.position.x) * 0.4f;
+                c.transform.position = new Vector3 (c.transform.position.x + move, c.transform.position.y, c.transform.position.z);
             });
         }
 
@@ -76,6 +78,7 @@ public class Tuto : MonoBehaviour {
         cars.ForEach (car => {
             car.moveTo (new Vector3 (getCarStart (car.playerId), -2, -3));
             car.GearAmount = 3;
+            car.tutoVisual.SetActive(true);
         });
     }
 
