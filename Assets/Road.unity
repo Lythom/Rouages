@@ -275,12 +275,12 @@ Prefab:
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.6399994
+      value: 0.6400027
       objectReference: {fileID: 0}
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.2299981
+      value: 1.2299976
       objectReference: {fileID: 0}
     - target: {fileID: 4308587529918516, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalPosition.y
@@ -717,12 +717,12 @@ Prefab:
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.6399994
+      value: 0.6400027
       objectReference: {fileID: 0}
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.2299981
+      value: 1.2299976
       objectReference: {fileID: 0}
     - target: {fileID: 212159599727590366, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
@@ -852,12 +852,12 @@ Prefab:
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.64000297
+      value: 0.6399995
       objectReference: {fileID: 0}
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.2299981
+      value: 1.2299976
       objectReference: {fileID: 0}
     - target: {fileID: 212159599727590366, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
@@ -1073,7 +1073,7 @@ Prefab:
     - target: {fileID: 114647154862601854, guid: faea9f6da8c52c94582062dcbd106285,
         type: 2}
       propertyPath: partyLength
-      value: 2
+      value: 35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: faea9f6da8c52c94582062dcbd106285, type: 2}
