@@ -35,7 +35,7 @@ public class Tuto : MonoBehaviour {
         // audioSource = GetComponent<AudioSource>();
         if (this.enabled) {
             placeCars ();
-            if(helpText != null) helpText.GetComponent<TextMesh> ().text = "Move here \n to start";
+            if(helpText != null) helpText.GetComponent<TextMesh> ().text = "";
             starting = false;
         }
     }
