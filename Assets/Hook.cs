@@ -51,8 +51,7 @@ public class Hook : MonoBehaviour
     public void fire()
     {
         rb.position = this.transform.position = thrower.position + Vector3.right;
-        var initialVelocity = thrower.GetComponent<Rigidbody2D>().velocity;
-        shootDirection = thrower.rotation * Vector3.right + new Vector3(0, initialVelocity.y * 0.2f, 0);
+        shootDirection = thrower.rotation * Vector3.right * 2;
         thrower.GetComponent<Move>().GearAmount--;
         this.gameObject.SetActive(true);
         FixedUpdate();

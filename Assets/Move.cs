@@ -95,6 +95,7 @@ public class Move : MonoBehaviour {
             rb.AddForce (new Vector2 (0, Input.GetAxis ("Vertical" + playerId) * verticalAcceleration));
         }
 
+        // HSpeed (hooked vs. geared)
         if (Hooking && hook.Hooked != null) {
             rb.AddForce (new Vector2 (0, (hook.Hooked.position.y - this.transform.position.y) * 20f));
             rb.velocity = new Vector2 (hook.Hooked.GetComponent<Rigidbody2D> ().velocity.x, rb.velocity.y * 0.9f);
@@ -105,7 +106,7 @@ public class Move : MonoBehaviour {
             rb.velocity = new Vector2 (rb.velocity.x + step, rb.velocity.y * 0.9f);
         }
 
-        this.transform.rotation = new Quaternion (0, 0, rb.velocity.y * rotationAmount, 1);
+        this.transform.rotation = new Quaternion (0, 0, Input.GetAxis ("Vertical" + playerId) * rotationAmount, 1);
 
         if (!audioSource.isPlaying) {
             PlayAudio (engineSounds[System.Math.Min (GearAmount, engineSounds.Length - 1)], true);
@@ -129,7 +130,7 @@ public class Move : MonoBehaviour {
 
         foreach (Transform item in this.transform) {
             if (item.CompareTag ("cargear")) {
-                item.gameObject.transform.Rotate (0, 0, gearAmount);
+                item.gameObject.transform.Rotate (0, 0, -gearAmount * 1.2f);
             }
         }
 

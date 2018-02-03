@@ -170,31 +170,16 @@ Prefab:
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.63999987
+      value: 0.6399965
       objectReference: {fileID: 0}
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1558223
+      value: 1.1558242
       objectReference: {fileID: 0}
-    - target: {fileID: 114891710731603410, guid: bcee15c91e3e9e14aa06839df994ae71,
-        type: 2}
-      propertyPath: groundTrail
-      value: 
-      objectReference: {fileID: 1350194984}
-    - target: {fileID: 114891710731603410, guid: bcee15c91e3e9e14aa06839df994ae71,
-        type: 2}
-      propertyPath: flyTrail
-      value: 
-      objectReference: {fileID: 421714850}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
   m_IsPrefabParent: 0
---- !u!198 &421714850 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 198244631329085818, guid: bcee15c91e3e9e14aa06839df994ae71,
-    type: 2}
-  m_PrefabInternal: {fileID: 117371373}
 --- !u!114 &642677160 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114891710731603410, guid: bcee15c91e3e9e14aa06839df994ae71,
@@ -300,12 +285,12 @@ Prefab:
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.6399995
+      value: 0.6400038
       objectReference: {fileID: 0}
     - target: {fileID: 224593785702223082, guid: bcee15c91e3e9e14aa06839df994ae71,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.1558247
+      value: 1.1558189
       objectReference: {fileID: 0}
     - target: {fileID: 4308587529918516, guid: bcee15c91e3e9e14aa06839df994ae71, type: 2}
       propertyPath: m_LocalPosition.y
@@ -715,11 +700,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224131466947166056, guid: b600d7438d2d21f4195c6cd8e2872dc3,
     type: 2}
   m_PrefabInternal: {fileID: 1264319209}
---- !u!198 &1350194984 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 198924411473223654, guid: bcee15c91e3e9e14aa06839df994ae71,
-    type: 2}
-  m_PrefabInternal: {fileID: 117371373}
 --- !u!114 &1621772539 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114891710731603410, guid: bcee15c91e3e9e14aa06839df994ae71,

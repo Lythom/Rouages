@@ -1056,7 +1056,7 @@ MonoBehaviour:
   horizontalAcceleration: 0.03
   horizontalMaxSpeedPerGear: 0.4
   maxVerticalSpeed: 99
-  rotationAmount: 0.1
+  rotationAmount: 0.3
   groundTrail: {fileID: 198924411473223654}
   flyTrail: {fileID: 198244631329085818}
   hook: {fileID: 114490367021989452}
@@ -8806,6 +8806,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.6400037, y: 1.1558223}
+  m_AnchoredPosition: {x: 0.63999844, y: 1.1558242}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
