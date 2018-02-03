@@ -53,6 +53,7 @@ public class Party : MonoBehaviour
             {
                 scores[c.playerId] = scores[c.playerId] + 1;
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
+                c.transform.position = new Vector3(winPosition.position.x - 0.5f, c.transform.position.y, c.transform.position.z);
                 c.moveTo(getStartPosition(c), true);
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
                 audioSource.Stop();
@@ -62,6 +63,7 @@ public class Party : MonoBehaviour
             {
                 scores[c.playerId] = System.Math.Max(0, scores[c.playerId] - 1);
                 scoreTexts[c.playerId].text = "Player " + c.playerId + "\n" + scores[c.playerId];
+                c.transform.position = new Vector3(losePosition.position.x + 0.5f, c.transform.position.y, c.transform.position.z);                
                 c.moveTo(getStartPosition(c), true);
                 c.GearAmount = INITIAL_GEAR_AMOUNT;
             }
