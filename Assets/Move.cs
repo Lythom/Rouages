@@ -17,6 +17,9 @@ public class Move : MonoBehaviour {
     public float maxVerticalSpeed = 99f;
     public float rotationAmount = 0.05f;
 
+    public ParticleSystem groundTrail;
+    public ParticleSystem flyTrail;
+
     public Hook hook;
 
     private bool isHookingButtonReleased = true;
@@ -181,12 +184,17 @@ public class Move : MonoBehaviour {
 
     private void hideWings () {
         wings.enabled = false;
-        shadow.enabled = false;
+        flyTrail.gameObject.SetActive(false);
+        groundTrail.gameObject.SetActive(true);
+        //shadow.enabled = false;
     }
 
     private void displayWings () {
         wings.enabled = true;
-        shadow.enabled = true;
+        flyTrail.gameObject.SetActive(true);
+        groundTrail.gameObject.SetActive(false);
+        
+        //shadow.enabled = true;
     }
 
     private List<SpriteRenderer> GetAllSpriteRenderers () {
